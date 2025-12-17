@@ -5,11 +5,22 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/vue',
+      redirect: '/js',
       component: () => import('@/views/home.vue'),
       children: [
         {
-          path: '/vue',
+          path: 'js',
+          redirect: '/js/objectLoop',
+          children: [
+            {
+              path: '/js/objectLoop',
+              name: 'objectLoop',
+              component: () => import('@/views/js/objectLoop/index.vue')
+            },
+          ]
+        },
+        {
+          path: 'vue',
           redirect: '/vue/provideInject',
           children: [
             {
