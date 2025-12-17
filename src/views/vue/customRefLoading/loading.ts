@@ -1,6 +1,6 @@
 import { customRef } from 'vue'
 
-export function loading = customRef(() => {
+export const loading = customRef((track, trigger) => {
   let loadingCount = 0;
 
   return {
@@ -9,11 +9,7 @@ export function loading = customRef(() => {
       return loadingCount > 0;
     },
     set(value) {
-      if (value) {
-        loadingCount++;
-      } else {
-        loadingCount--;
-      }
+      loadingCount += value ? 1 : -1;
       loadingCount = Math.max(loadingCount, 0);
       trigger();
     }
