@@ -36,6 +36,12 @@ const vueComponent = {
   "/vue/listenerSon": {
     name: "父组件监听子组件生命周期",
   },
+  "/vue/useTemplateRef": {
+    name: "useTemplateRef实现原理",
+  },
+  "/vue/preloadImage": {
+    name: "图片预加载",
+  },
 } as const;
 
 export const component: Record<string, ComponentMeta> = {
