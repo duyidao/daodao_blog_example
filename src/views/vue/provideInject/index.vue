@@ -4,7 +4,7 @@ import { provideContext, injectContext } from './createContext'
 import Son from './son.vue'
 import Son2 from './son2.vue'
 
-const title = ref('传递的参数')
+const title = ref<string>('传递的参数')
 provideContext(title)
 
 watch(title, (newVal) => {

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Son from './son.vue'
 import { ref } from 'vue'
+import { ElMessage } from 'element-plus'
 
 const flag = ref(false)
 

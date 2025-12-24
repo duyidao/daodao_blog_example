@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const data = ref('暂无数据')
+const data = ref<string>('暂无数据')
 
-function createCancelTask(task) {
+// 定义 PromiseResolve 和 PromiseReject 类型别名，便于复用
+type PromiseResolve<T> = (value: T | PromiseLike<T>) => void;
+type PromiseReject<T> = (reason?: any) => void;
+
+function createCancelTask<T>(task: (...args: any[]) => Promise<T>) {
   let cancel = () => {};
-  return (...args) => {
-    return new Promise((resolve, reject) => {
+  return (...args: any[]) => {
+    return new Promise<T>((resolve: PromiseResolve<T>, reject: PromiseReject<T>) => {
       cancel()
       cancel = () => { 
         resolve = reject = () => {} 
@@ -16,7 +20,7 @@ function createCancelTask(task) {
   }
 }
 
-const getData = createCancelTask((title = '1') => {
+const getData = createCancelTask<string>((title: string = '1') => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(title)
@@ -24,8 +28,8 @@ const getData = createCancelTask((title = '1') => {
   })
 })
 
-const getTitleData = (params) => {
-  getData(params).then(res => {
+const getTitleData = (params: string) => {
+  getData(params).then((res: string) => {
     data.value = res
   })
 }

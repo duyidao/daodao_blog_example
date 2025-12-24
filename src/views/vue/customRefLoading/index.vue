@@ -2,41 +2,44 @@
 import { ref } from 'vue'
 import { loading } from './loading'
 
-const tableData = ref([])
+interface TableItem {
+  hitokoto: string
+  from: string
+  from_who: string
+}
 
-const wordList = ref([
-  '当前无模拟接口',
-  '当前无模拟接口',
-  '当前无模拟接口',
-])
+const tableData = ref<TableItem[]>([])
+
+const wordList = ref(['当前无模拟接口', '当前无模拟接口', '当前无模拟接口'])
 
 const mockFetch = (type = 'k', index = 0) => {
   loading.value = true
   wordList.value[index] = '正在请求接口中'
   const startTime = Date.now()
   return new Promise((resolve) => {
-    fetch('https://v1.hitokoto.cn/?c=' + type).then(res => res.json()).then(res => {
-      const endTime = Date.now()
-      tableData.value.push({ hitokoto: res.hitokoto, from: res.from, from_who: res.from_who })
-      loading.value = false
-      wordList.value[index] = '接口请求成功，请求时间' + ((endTime - startTime) / 1000) + 's'
-      resolve()
-    })
+    fetch('https://v1.hitokoto.cn/?c=' + type)
+      .then((res) => res.json())
+      .then((res: TableItem) => {
+        const endTime = Date.now()
+        tableData.value.push(res)
+        loading.value = false
+        wordList.value[index] =
+          '接口请求成功，请求时间' + (endTime - startTime) / 1000 + 's'
+        resolve(undefined)
+      })
   })
 }
 
 const mockFetchFn = () => {
-  Promise.all([
-    mockFetch(),
-    mockFetch('c', 1),
-    mockFetch('d', 2)
-  ])
+  Promise.all([mockFetch(), mockFetch('c', 1), mockFetch('d', 2)])
 }
 </script>
 
 <template>
   <div>
-    <el-button :loading="loading" @click="mockFetchFn">点击调用三个接口</el-button>
+    <el-button :loading="loading" @click="mockFetchFn"
+      >点击调用三个接口</el-button
+    >
     <div class="flex items-center gap-20 my-20">
       <span v-for="(item, index) in wordList" :key="index">{{ item }}</span>
     </div>
@@ -48,6 +51,4 @@ const mockFetchFn = () => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

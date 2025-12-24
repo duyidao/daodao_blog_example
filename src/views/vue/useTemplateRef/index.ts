@@ -1,15 +1,16 @@
 import { shallowRef, getCurrentInstance } from 'vue'
 
-const wmMap = new WeakMap()
+const vmMap = new WeakMap()
 
-export function useTemplateRef(key) {
+export function useTemplateRef(key: string) {
   const container = shallowRef()
 
   const vm = getCurrentInstance()
+  if (!vm) return
   // 判断是否有vm，有的话就不重新赋值，避免覆盖旧值
-  if (!wmMap.has(vm)) {
+  if (!vmMap.has(vm)) {
     vm.refs = {}
-    wmMap.set(vm, {})
+    vmMap.set(vm, {})
   }
   Object.defineProperty(vm.refs, key, {
     get() {
@@ -17,7 +18,7 @@ export function useTemplateRef(key) {
     },
     set(value) {
       container.value = value
-    }
+    },
   })
 
   return container

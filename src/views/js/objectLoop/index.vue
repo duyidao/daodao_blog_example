@@ -1,5 +1,5 @@
 <script setup lang="ts">
-function hasCircleRef(obj, seen = new Set()) {
+function hasCircleRef(obj: any, seen = new Set<object>()): boolean {
   if (!(typeof obj === 'object' && obj !== null)) {
     return false
   }
@@ -20,7 +20,7 @@ const obj = {
       e: 3
     }
   }
-}
+} as any
 
 obj.f = obj
 </script>

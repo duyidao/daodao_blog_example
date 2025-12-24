@@ -1,36 +1,37 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import type { FormInstance } from 'element-plus'
 
 withDefaults(
   defineProps<{
     msg: string
   }>(),
   {
-    msg: '请登录'
+    msg: '请登录',
   }
 )
 
 const formData = reactive({
   username: '',
-  password: ''
+  password: '',
 })
 
 const rules = {
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
-    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-  ]
+    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
+  ],
 }
 
-const formRef = ref(null)
+const formRef = ref<FormInstance | null>(null)
 
 const submit = () => {
   return new Promise((resolve, reject) => {
-    formRef.value.validate((valid: boolean) => {
+    formRef.value!.validate((valid: boolean) => {
       if (valid) {
         resolve(valid)
       } else {
@@ -40,9 +41,8 @@ const submit = () => {
   })
 }
 
-
 defineExpose({
-  submit
+  submit,
 })
 </script>
 
@@ -58,6 +58,4 @@ defineExpose({
   </el-form>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

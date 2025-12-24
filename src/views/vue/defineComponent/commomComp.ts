@@ -1,13 +1,13 @@
 export const createReusableTemplate = () => {
-  let render
+  let render: ((props?: any) => any) | undefined
   const DefineTemplate = {
-    setup(_, {slots}) {
+    setup(_: any, { slots }: { slots: any }) {
       return () => {
-        render = slots.default;
-      };
+        render = slots.default
+      }
     },
-  };
-  const UseTemplate = (props) => render(props);
+  }
+  const UseTemplate = (props?: any) => render?.(props)
 
-  return [DefineTemplate, UseTemplate];
+  return [DefineTemplate, UseTemplate]
 }

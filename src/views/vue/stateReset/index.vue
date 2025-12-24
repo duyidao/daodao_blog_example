@@ -8,13 +8,13 @@ const { state: fnRefState, reset: fnRefReset } = useResetRefByFn(() => ({
   c: [3, 4, 5]
 }))
 
-const { state: objRefState, reset: objRefReset } = useResetRefByObj({
+const { state: objRefState, reset: objRefReset } = useResetRefByObj<{ name: string, age: number, address: string }>({
   name: '刀刀',
   age: 25,
   address: '广东省广州市增城区广州华商学院'
 })
 
-const [reactiveState, reactiveReset] = useResetReactive({
+const [reactiveState, reactiveReset] = useResetReactive<{ url: string, type: string, tag: string }>({
   url: '123',
   type: 'vue',
   tag: 'pr'

@@ -8,14 +8,14 @@ const outputValue = useTransition(source, {
   duration: 1500,
 })
 source.value = 172000
-import {createReusableTemplate} from './commomComp'
+import { createReusableTemplate } from './commomComp'
 
 const [DefineTemplate, UseTemplate] = createReusableTemplate()
 </script>
 
 <template>
   <DefineTemplate>
-    <template #default="{title, money, onFoo}">
+    <template #default="{ title, money, onFoo }">
       <el-row :gutter="16" @click="onFoo && onFoo(111)">
         <el-col :xs="24" :sm="12" :md="8" class="text-center mb-4">
           <el-statistic :title="title" :value="money" />
@@ -53,6 +53,4 @@ const [DefineTemplate, UseTemplate] = createReusableTemplate()
   <UseTemplate title="footer" :money="20814"></UseTemplate>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

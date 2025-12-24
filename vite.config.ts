@@ -7,6 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
+import { PreloadImage } from './src/utils/preloadImage'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -21,6 +22,12 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
     UnoCSS(),
+    PreloadImage({
+      dir: 'images/*.{jpg,png,svg,webp}',
+      attrs: {
+        rel: 'prefetch'
+      }
+    }), // 预加载图片
   ],
   server: {
     port: 814,
