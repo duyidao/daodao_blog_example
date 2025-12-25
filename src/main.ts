@@ -1,11 +1,8 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import 'element-plus/dist/index.css'
-import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'virtual:uno.css'
+import './assets/styles/main.scss'
 
 const app = createApp(App)
 

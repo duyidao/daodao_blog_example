@@ -11,11 +11,13 @@ const getData = () => {
 </script>
 
 <template>
-  <MyButton @click="getData">点击模拟调用接口</MyButton>
-  <MyButton @click="getData">点击模拟调用接口</MyButton>
-  <MyButton @click="getData">点击模拟调用接口</MyButton>
-  <MyButton @click="getData">点击模拟调用接口</MyButton>
-  <MyButton @click="getData">点击模拟调用接口</MyButton>
+  <div class="flex flex-col gap-10">
+    <MyButton @click="getData">点击模拟调用接口</MyButton>
+    <MyButton @click="getData">点击模拟调用接口</MyButton>
+    <MyButton @click="getData">点击模拟调用接口</MyButton>
+    <MyButton @click="getData">点击模拟调用接口</MyButton>
+    <MyButton @click="getData">点击模拟调用接口</MyButton>
+  </div>
 </template>
 
 <style scoped></style>

@@ -1,0 +1,4 @@
+@use './base.scss';
+@use './element.scss';
+@use './var.scss'; // 先导入变量覆盖
+@use 'element-plus/theme-chalk/src/index.scss';

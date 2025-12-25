@@ -32,6 +32,13 @@ export default defineConfig({
   server: {
     port: 814,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/var.scss" as *;`,
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

@@ -9,6 +9,8 @@ import {
   Briefcase,
 } from '@element-plus/icons-vue'
 import { RouterView, useRoute } from 'vue-router'
+import { useEvent } from '@/views/vue/useEventListener/index'
+import { throttle } from 'lodash-es'
 
 type AllowedPath = '/js' | '/package' | '/vue'
 
@@ -27,13 +29,21 @@ const isCollapse = ref(false)
 const handleMenuExpand = () => {
   isCollapse.value = !isCollapse.value
 }
+
+const scrollWindow = () => {
+  const viewportWidth = window.innerWidth;
+  isCollapse.value = viewportWidth < 1024 ? true : false
+}
+scrollWindow()
+// 监听窗口大小变化
+useEvent('resize', throttle(scrollWindow, 500))
 </script>
 
 <template>
   <div class="flex w-full h-full">
-    <div class="menu relative">
+    <div class="menu h-full pb-10">
       <el-menu
-        class="h-full border-r-none overflow-auto pb-60"
+        class="h-[calc(100%-60px)] border-r-none overflow-auto"
         :class="{ 'w-250': !isCollapse }"
         :default-active="route.path"
         :collapse="isCollapse"
@@ -59,13 +69,17 @@ const handleMenuExpand = () => {
           </el-menu-item>
         </el-sub-menu>
       </el-menu>
-      <el-icon
-        class="absolute left-0 bottom-0 w-full h-60 items-center justify-start text-25 pl-15 cursor-pointer text-white bg-[var(--el-menu-bg-color)] transition-all duration-300"
+      <div class="flex w-full h-50 items-center justify-start bg-[var(--el-menu-bg-color)] pl-15">
+        <el-icon
+        class="cursor-pointer"
+        size="30"
+        color="#505050"
         @click="handleMenuExpand"
       >
-        <Expand v-show="!isCollapse" />
-        <Fold v-show="isCollapse" />
+        <Expand v-show="isCollapse" />
+        <Fold v-show="!isCollapse" />
       </el-icon>
+      </div>
     </div>
     <div class="p-20 flex-1">
       <el-card class="h-full">
