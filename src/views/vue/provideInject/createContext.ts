@@ -1,12 +1,12 @@
-import { provide, inject, computed } from 'vue'
+import { provide, inject } from "vue";
 
-export const contextKey = Symbol('prrovideInjectContext')
+export const contextKey = Symbol("prrovideInjectContext");
 
 export const provideContext = <T>(contextValue: T) => {
-  provide(contextKey, contextValue)
-  return contextValue
-}
+  provide(contextKey, contextValue);
+  return contextValue;
+};
 
-export const injectContext = (value?: string ) => {
-  return inject(contextKey, (value || '我是默认内容'))
-}
+export const injectContext = (value?: string) => {
+  return inject(contextKey, value || "我是默认内容");
+};

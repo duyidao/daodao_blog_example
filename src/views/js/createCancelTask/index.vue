@@ -8,13 +8,13 @@ type PromiseResolve<T> = (value: T | PromiseLike<T>) => void;
 type PromiseReject<T> = (reason?: any) => void;
 
 function createCancelTask<T>(task: (...args: any[]) => Promise<T>) {
-  let cancel = () => {};
+  let cancel = () => { };
   return (...args: any[]) => {
     return new Promise<T>((resolve: PromiseResolve<T>, reject: PromiseReject<T>) => {
       cancel()
-      cancel = () => { 
-        resolve = reject = () => {} 
-      } 
+      cancel = () => {
+        resolve = reject = () => { }
+      }
       task(...args).then(res => resolve(res)).catch(err => reject(err));
     });
   }
@@ -42,11 +42,9 @@ const getTitleData = (params: string) => {
     <el-button @click="getTitleData('daodao')">获取Daodao</el-button>
     <el-button @click="getTitleData('blog')">获取Blog</el-button>
     <div class="mt-20">
-      <el-tag>{{data}}</el-tag>
+      <el-tag>{{ data }}</el-tag>
     </div>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

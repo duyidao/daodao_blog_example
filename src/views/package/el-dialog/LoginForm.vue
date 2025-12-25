@@ -47,12 +47,16 @@ defineExpose({
 </script>
 
 <template>
-  <el-form ref="formRef" :model="formData" :rules="rules">
+  <el-form ref="formRef"
+    :model="formData"
+    :rules="rules">
     <p class="mb-20">{{ msg }}</p>
-    <el-form-item label="账号" prop="username">
+    <el-form-item label="账号"
+      prop="username">
       <el-input v-model="formData.username"></el-input>
     </el-form-item>
-    <el-form-item label="密码" prop="password">
+    <el-form-item label="密码"
+      prop="password">
       <el-input v-model="formData.password"></el-input>
     </el-form-item>
   </el-form>

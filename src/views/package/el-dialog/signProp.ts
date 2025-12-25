@@ -1,11 +1,5 @@
-import { ElDialog, ElButton, type DialogProps } from 'element-plus'
-import {
-  ref,
-  h,
-  createApp,
-  type ComponentPublicInstance,
-  type DefineComponent,
-} from 'vue'
+import { ElDialog, ElButton, type DialogProps } from "element-plus";
+import { ref, h, createApp } from "vue";
 
 /**
  * 弹窗组件
@@ -19,14 +13,14 @@ export const signProp = <T extends Record<string, any>>({
   modalProps = {},
   onComfirm = () => {},
 }: {
-  component: any
-  props: T
-  modalProps?: Partial<DialogProps>
-  onComfirm?: () => Promise<void> | void
+  component: any;
+  props: T;
+  modalProps?: Partial<DialogProps>;
+  onComfirm?: () => Promise<void> | void;
 }) => {
-  const visible = ref(true)
-  const instanceRef = ref<any>(null)
-  const loading = ref(false)
+  const visible = ref(true);
+  const instanceRef = ref<any>(null);
+  const loading = ref(false);
 
   const dialog = () =>
     h(
@@ -38,51 +32,51 @@ export const signProp = <T extends Record<string, any>>({
       {
         default: () => h(component, { ...props, ref: instanceRef }),
         footer: () =>
-          h('div', {}, [
+          h("div", {}, [
             h(
               ElButton,
               {
                 onClick() {
-                  unmount()
+                  unmount();
                 },
               },
-              { default: () => '取消' }
+              { default: () => "取消" }
             ),
             h(
               ElButton,
               {
-                type: 'primary',
+                type: "primary",
                 loading: loading.value,
                 async onClick() {
-                  loading.value = true
+                  loading.value = true;
                   try {
-                    await instanceRef.value?.submit()
-                    await onComfirm()
-                    unmount()
+                    await instanceRef.value?.submit();
+                    await onComfirm();
+                    unmount();
                   } catch (error) {
-                    console.log(error)
+                    console.log(error);
                   } finally {
-                    loading.value = false
+                    loading.value = false;
                   }
                 },
               },
-              { default: () => '确认' }
+              { default: () => "确认" }
             ),
           ]),
       }
-    )
+    );
 
-  const app = createApp(dialog)
-  const div = document.createElement('div')
-  document.body.appendChild(div)
-  app.mount(div)
+  const app = createApp(dialog);
+  const div = document.createElement("div");
+  document.body.appendChild(div);
+  app.mount(div);
 
   function unmount() {
-    visible.value = false
+    visible.value = false;
     setTimeout(() => {
       // 组件关闭后再卸载组件，保留弹框的关闭动画
-      app.unmount()
-      document.body.removeChild(div)
-    }, 300)
+      app.unmount();
+      document.body.removeChild(div);
+    }, 300);
   }
-}
+};

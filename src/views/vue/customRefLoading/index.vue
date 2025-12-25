@@ -37,16 +37,22 @@ const mockFetchFn = () => {
 
 <template>
   <div>
-    <el-button :loading="loading" @click="mockFetchFn"
-      >点击调用三个接口</el-button
-    >
+    <el-button :loading="loading"
+      @click="mockFetchFn">点击调用三个接口</el-button>
     <div class="flex items-center gap-20 my-20">
-      <span v-for="(item, index) in wordList" :key="index">{{ item }}</span>
+      <span v-for="(item, index) in wordList"
+        :key="index">{{ item }}</span>
     </div>
-    <el-table :data="tableData" v-loading="loading">
-      <el-table-column prop="hitokoto" label="一言" />
-      <el-table-column prop="from" label="来源" width="180" />
-      <el-table-column prop="from_who" label="来源者" width="180" />
+    <el-table :data="tableData"
+      v-loading="loading">
+      <el-table-column prop="hitokoto"
+        label="一言" />
+      <el-table-column prop="from"
+        label="来源"
+        width="180" />
+      <el-table-column prop="from_who"
+        label="来源者"
+        width="180" />
     </el-table>
   </div>
 </template>

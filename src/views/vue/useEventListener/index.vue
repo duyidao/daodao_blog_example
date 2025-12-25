@@ -26,7 +26,8 @@ const showElement = ref(false)
 
 <template>
   <el-button @click="showElement = !showElement">{{ showElement ? '隐藏' : '挂载' }}组件</el-button>
-  <el-button v-if="showElement" @click="stopFn">{{ isStop ? '重新' : '停止' }}监听</el-button>
+  <el-button v-if="showElement"
+    @click="stopFn">{{ isStop ? '重新' : '停止' }}监听</el-button>
   <h1 v-if="showElement"
     class="mt-10"
     ref="buttonRef">Hello vue3</h1>

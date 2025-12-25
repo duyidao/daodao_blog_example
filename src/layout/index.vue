@@ -41,47 +41,39 @@ useEvent('resize', throttle(scrollWindow, 500))
 
 <template>
   <div class="flex w-full h-full">
-    <div class="menu h-full pb-10">
-      <el-menu
-        class="h-[calc(100%-60px)] border-r-none overflow-auto"
+    <div class="menu h-full pb-10 shadow-xl">
+      <el-menu class="h-[calc(100%-50px)] !border-r-none overflow-auto"
         :class="{ 'w-250': !isCollapse }"
         :default-active="route.path"
         :collapse="isCollapse"
-        router
-      >
-        <el-sub-menu
-          v-for="item in menuList"
+        router>
+        <el-sub-menu v-for="item in menuList"
           :key="item.path"
-          :index="item.path"
-        >
+          :index="item.path">
           <template #title>
             <el-icon el-icon>
               <component :is="pathIconMap[item.path as AllowedPath]" />
             </el-icon>
             <span>{{ item.path.replace('/', '').toUpperCase() }}</span>
           </template>
-          <el-menu-item
-            v-for="route in item.children"
+          <el-menu-item v-for="route in item.children"
             :key="route.path"
-            :index="route.path"
-          >
+            :index="route.path">
             <span>{{ route.meta!.name }}</span>
           </el-menu-item>
         </el-sub-menu>
       </el-menu>
       <div class="flex w-full h-50 items-center justify-start bg-[var(--el-menu-bg-color)] pl-15">
-        <el-icon
-        class="cursor-pointer"
-        size="30"
-        color="#505050"
-        @click="handleMenuExpand"
-      >
-        <Expand v-show="isCollapse" />
-        <Fold v-show="!isCollapse" />
-      </el-icon>
+        <el-icon class="cursor-pointer"
+          size="30"
+          color="#505050"
+          @click="handleMenuExpand">
+          <Expand v-show="isCollapse" />
+          <Fold v-show="!isCollapse" />
+        </el-icon>
       </div>
     </div>
-    <div class="p-20 flex-1">
+    <div class="p-15 flex-1">
       <el-card class="h-full">
         <RouterView />
       </el-card>

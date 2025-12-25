@@ -1,4 +1,4 @@
-import { customRef } from 'vue'
+import { customRef } from "vue";
 
 export const loading = customRef((track, trigger) => {
   let loadingCount = 0;
@@ -12,6 +12,6 @@ export const loading = customRef((track, trigger) => {
       loadingCount += value ? 1 : -1;
       loadingCount = Math.max(loadingCount, 0);
       trigger();
-    }
+    },
   };
-})
+});
