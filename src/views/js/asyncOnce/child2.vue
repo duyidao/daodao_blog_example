@@ -10,7 +10,9 @@ loadOnce().then(res => {
 </script>
 
 <template>
-  <div>child2: {{data}}</div>
+  <el-descriptions title="child2" :column="2">
+    <el-descriptions-item v-for="(value, key, index) in data" :label="key" :key="value">{{value}}</el-descriptions-item>
+  </el-descriptions>
 </template>
 
 <style scoped>
